@@ -6,8 +6,9 @@
   "scripts": {
     "start": "ts-node-dev --poll src/index.ts",
     "test": "jest --watchAll --no-cache",
-    "test:ci": "jest",
-    "lint": "eslint \"**/*.{ts,tsx}\""
+    "test:ci": "jest --passWithNoTests",
+    "lint": "eslint \"**/*.ts\"",
+    "precommit": "lint-staged && yarn test:ci"
   },
   "jest": {
     "preset": "ts-jest",
@@ -44,8 +45,15 @@
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-import": "^2.22.1",
     "jest": "^26.1.0",
+    "lint-staged": "^10.5.4",
     "mongodb-memory-server": "^6.6.1",
     "supertest": "^4.0.2",
     "ts-jest": "^26.1.1"
+  },
+  "lint-staged": {
+    "**/*.ts": [
+      "yarn lint",
+      "git add ."
+    ]
   }
 }
