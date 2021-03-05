@@ -12,7 +12,6 @@ app.use(cors());
 
 app.use(indexFormRouter);
 
-app.get('/', (req, res) => res.json({ foo: 'buzz' }));
 app.all('*', async () => {
   throw new Error('API not available!');
 });
