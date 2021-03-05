@@ -4,7 +4,7 @@ import { BaseRoute } from './base-route';
 const router = express.Router();
 
 router.get(BaseRoute.API, async (req: Request, res: Response) => {
-  res.status(200).send({});
+  res.status(200).send('Hello World!');
 });
 
-export { router as indexFormRouter };
+export { router as indexRootRouter };

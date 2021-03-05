@@ -20,12 +20,14 @@
       "src/**/*.ts",
       "!src/**/*.d.ts",
       "!src/index.ts",
-      "!src/app.ts"
+      "!src/app.ts",
+      "!src/libs/*.ts"
     ],
     "coveragePathIgnorePatterns": [
       "./src/*/*.types.ts",
       "./src/index.ts",
-      "./src/app.ts"
+      "./src/app.ts",
+      "./src/libs/*.ts"
     ],
     "coverageReporters": [
       "json",
@@ -46,25 +48,31 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "app-root-path": "^3.0.0",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-async-errors": "^3.1.1",
     "express-validator": "^6.6.0",
+    "helmet": "^4.4.1",
     "mongoose": "^5.9.21",
     "mongoose-update-if-current": "^1.4.0",
+    "morgan": "^1.10.0",
     "swagger-jsdoc": "^7.0.0-rc.4",
     "swagger-ui-express": "^4.1.6",
     "ts-node-dev": "^1.0.0-pre.50",
-    "typescript": "^3.9.6"
+    "typescript": "^3.9.6",
+    "winston": "^3.3.3"
   },
   "devDependencies": {
+    "@types/app-root-path": "^1.2.4",
     "@types/body-parser": "^1.19.0",
     "@types/cors": "^2.8.7",
     "@types/express": "^4.17.6",
     "@types/jest": "^26.0.4",
     "@types/mongoose": "^5.7.29",
+    "@types/morgan": "^1.9.2",
     "@types/supertest": "^2.0.10",
     "@types/swagger-jsdoc": "^6.0.0",
     "@types/swagger-ui-express": "^4.1.2",
