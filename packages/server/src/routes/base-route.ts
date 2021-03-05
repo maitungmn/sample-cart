@@ -1,3 +1,3 @@
 export enum BaseRoute {
-  API = '/api'
+  API = '/api/v1'
 }
