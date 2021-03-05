@@ -1,13 +1,12 @@
 import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './components/App';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { ThemeProvider } from '@material-ui/core/styles';
+import { Router, Switch, Route } from 'react-router-dom';
 import theme from './theme';
 
-import { Router, Switch, Route } from 'react-router-dom';
-import history from "./history";
+import App from './components/App';
+import history from './history';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -16,11 +15,12 @@ ReactDOM.render(
       <Suspense fallback={<div>Loading...</div>}>
         <Router history={history}>
           <Switch>
-            <Route exact path='/' component={App} />
+            <Route exact path="/" component={App} />
           </Switch>
         </Router>
       </Suspense>
-    </ThemeProvider>,
+    </ThemeProvider>
+    ,
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById('root'),
 );
