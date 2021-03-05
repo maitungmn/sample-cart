@@ -43,6 +43,7 @@
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-react": "^7.14.3",
     "eslint-plugin-react-hooks": "^1.7.0",
+    "lint-staged": "^10.5.4",
     "react-test-renderer": "^17.0.1",
     "sinon": "^9.2.4",
     "ts-jest": "^26.5.3",
@@ -53,7 +54,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "npx eslint --fix src/**/*.ts*"
+    "lint": "npx eslint --fix src/**/*.ts*",
+    "precommit": "lint-staged"
   },
   "eslintConfig": {
     "env": {
@@ -90,16 +92,29 @@
         }
       ],
       "no-use-before-define": "off",
-      "@typescript-eslint/no-use-before-define": ["error"],
+      "@typescript-eslint/no-use-before-define": [
+        "error"
+      ],
       "import/extensions": "off"
     },
     "settings": {
       "import/resolver": {
         "node": {
-          "extensions": [".js", ".jsx", ".ts", ".tsx"]
+          "extensions": [
+            ".js",
+            ".jsx",
+            ".ts",
+            ".tsx"
+          ]
         }
       }
     }
+  },
+  "lint-staged": {
+    "src/**/*.ts*": [
+      "yarn lint",
+      "git add"
+    ]
   },
   "browserslist": {
     "production": [
