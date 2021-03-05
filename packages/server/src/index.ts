@@ -1,13 +1,13 @@
 // import mongoose from "mongoose"
-import * as dotenv from "dotenv"
-import { app } from "./app"
+import * as dotenv from 'dotenv';
+import { app } from './app';
 
-dotenv.config()
-const port = process.env.APP_PORT || 5000
-
+dotenv.config();
+const port = process.env.APP_PORT || 5000;
 
 const start = async () => {
-  console.log('Starting...')
+  // eslint-disable-next-line no-console
+  console.log('Starting...');
 
   // if (!process.env.HOST_MONGO) {
   //   throw new Error('HOST_MONGO must be defined')
@@ -24,9 +24,9 @@ const start = async () => {
   //   console.error(e)
   // }
   app.listen(port, () => {
-    console.log('Listening on port', port)
-  })
-}
+    // eslint-disable-next-line no-console
+    console.log('Listening on port', port);
+  });
+};
 
-start()
-
+start();
