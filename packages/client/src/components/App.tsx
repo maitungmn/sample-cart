@@ -3,7 +3,7 @@ import React from 'react';
 function App() {
   return (
     <div>
-      <p>Hello world</p>
+      <h1>Hello World { { foo: 'bar' } }</h1>
     </div>
   );
 }
