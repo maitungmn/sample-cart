@@ -14,7 +14,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npx lerna run --concurrency 1 --stream precommit"
+      "pre-commit": "echo \"[Husky] pre-commit\" && npx lerna run --concurrency 1 --stream precommit"
     }
   }
 }
