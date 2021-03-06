@@ -12,7 +12,9 @@ import swaggerDocument from './docs/swagger.json';
 import corsConfig from './libs/cors';
 import { LoggerStream } from './libs/winston';
 import {
-  fetchDashboardRouter, fetchProductsByCateIDRouter,
+  fetchDashboardRouter,
+  fetchProductsByCateIDRouter,
+  fetchProductsByUserIDRouter,
   indexRootRouter,
   seedRouter,
 } from './routes';
@@ -43,6 +45,7 @@ app.use(seedRouter);
 // Routes: Main
 app.use(fetchDashboardRouter);
 app.use(fetchProductsByCateIDRouter);
+app.use(fetchProductsByUserIDRouter);
 
 app.all('*', async () => {
   throw new Error('API not available!');
