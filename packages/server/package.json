@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "ts-node-dev --poll src/index.ts",
-    "test": "jest --watchAll --no-cache",
+    "test": "jest --watchAll --no-cache --coverage",
     "test:ci": "jest --bail --passWithNoTests --coverage",
     "lint": "eslint \"**/*.ts\"",
     "precommit": "yarn test:ci && lint-staged"
@@ -42,7 +42,8 @@
         "lines": 80,
         "functions": 80
       }
-    }
+    },
+    "verbose": true
   },
   "keywords": [],
   "author": "",
@@ -63,6 +64,7 @@
     "swagger-ui-express": "^4.1.6",
     "ts-node-dev": "^1.0.0-pre.50",
     "typescript": "^3.9.6",
+    "uuid": "^8.3.2",
     "winston": "^3.3.3"
   },
   "devDependencies": {
@@ -76,6 +78,7 @@
     "@types/supertest": "^2.0.10",
     "@types/swagger-jsdoc": "^6.0.0",
     "@types/swagger-ui-express": "^4.1.2",
+    "@types/uuid": "^8.3.0",
     "@typescript-eslint/eslint-plugin": "^4.16.1",
     "@typescript-eslint/parser": "^4.16.1",
     "eslint": "^7.21.0",

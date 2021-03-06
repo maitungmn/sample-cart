@@ -1,3 +1,9 @@
+export const baseAPI = '/api/v1';
+
 export enum BaseRoute {
-  API = '/api/v1'
+  Docs = '/api-docs',
+  Seed = '/seed',
+  Dashboard = '/dashboard',
+  Products = '/products',
+  Payment = '/pay',
 }

@@ -1,11 +1,11 @@
 import request from 'supertest';
 import { app } from '../../app';
-import { BaseRoute } from '../base-route';
+import { baseAPI } from '../base-route';
 
-describe('Test packages/server/src/routes/index.ts', () => {
+describe('Test packages/server/src/routes/root.ts', () => {
   it('can fetch root api', async () => {
     await request(app)
-      .get(BaseRoute.API)
+      .get(baseAPI)
       .send()
       .expect(200);
   });

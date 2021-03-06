@@ -1,10 +1,5 @@
-import express, { Response, Request } from 'express';
-import { BaseRoute } from './base-route';
-
-const router = express.Router();
-
-router.get(BaseRoute.API, async (req: Request, res: Response) => {
-  res.status(200).send('Hello World!');
-});
-
-export { router as indexRootRouter };
+export * from './root';
+export * from './seed';
+export * from './fetchDashboard';
+export * from './products';
+export * from './user';

@@ -11,11 +11,20 @@ import swaggerDocument from './docs/swagger.json';
 
 import corsConfig from './libs/cors';
 import { LoggerStream } from './libs/winston';
-
-import { indexRootRouter } from './routes';
+import {
+  addProductsToCartRouter, deleteProductInCartRouter,
+  fetchDashboardRouter,
+  fetchProductsByCateIDRouter,
+  fetchProductsByUserIDRouter,
+  indexRootRouter, paymentRouter,
+  seedRouter,
+} from './routes';
+import { BaseRoute } from './routes/base-route';
+import { ECommons } from './commons';
 
 const hostname = process.env.APP_HOST;
 const port = process.env.APP_PORT;
+const isDev = process.env.APP_ENV || ECommons.Dev;
 
 const app = express();
 app.set('trust proxy', true);
@@ -23,11 +32,25 @@ app.use(json());
 // @ts-ignore
 app.use(cors(corsConfig({ hostname, port })));
 
-app.use(morgan('combined', { stream: new LoggerStream() }));
+// eslint-disable-next-line no-unused-expressions
+isDev !== ECommons.Dev && app.use(morgan('combined', { stream: new LoggerStream() }));
 app.use(helmet());
 
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+// Routes
+// Routes: API Doc
+app.use(BaseRoute.Docs, swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+// Routes: Root
 app.use(indexRootRouter);
+// Routes: Seed
+app.use(seedRouter);
+// Routes: Products
+app.use(fetchDashboardRouter);
+app.use(fetchProductsByCateIDRouter);
+app.use(fetchProductsByUserIDRouter);
+app.use(addProductsToCartRouter);
+app.use(deleteProductInCartRouter);
+// Routes: Pay
+app.use(paymentRouter);
 
 app.all('*', async () => {
   throw new Error('API not available!');

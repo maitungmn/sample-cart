@@ -27,5 +27,6 @@ module.exports = {
     'no-param-reassign': 'off',
     'no-underscore-dangle': 'off',
     'no-plusplus': 'off',
+    'no-use-before-define': 'off',
   },
 };
