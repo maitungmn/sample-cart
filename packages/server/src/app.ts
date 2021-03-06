@@ -12,6 +12,7 @@ import swaggerDocument from './docs/swagger.json';
 import corsConfig from './libs/cors';
 import { LoggerStream } from './libs/winston';
 import {
+  addProductsToCartRouter,
   fetchDashboardRouter,
   fetchProductsByCateIDRouter,
   fetchProductsByUserIDRouter,
@@ -46,6 +47,7 @@ app.use(seedRouter);
 app.use(fetchDashboardRouter);
 app.use(fetchProductsByCateIDRouter);
 app.use(fetchProductsByUserIDRouter);
+app.use(addProductsToCartRouter);
 
 app.all('*', async () => {
   throw new Error('API not available!');

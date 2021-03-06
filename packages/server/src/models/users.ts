@@ -4,19 +4,19 @@ import { BaseCollections } from './base-collections';
 
 interface UsersAttrs {
   userID: string;
-  name: string;
-  address: string;
-  phone: string;
-  email: string;
+  name?: string;
+  address?: string;
+  phone?: string;
+  email?: string;
   cart?: mongoose.Types.ObjectId[];
 }
 
 export interface UsersDoc extends mongoose.Document {
   userID: string;
-  name: string;
-  address: string;
-  phone: string;
-  email: string;
+  name?: string;
+  address?: string;
+  phone?: string;
+  email?: string;
   cart?: mongoose.Types.ObjectId[];
   version: number;
 }
@@ -33,19 +33,15 @@ const usersSchema = new mongoose.Schema({
   },
   name: {
     type: String,
-    required: true,
   },
   address: {
     type: String,
-    required: true,
   },
   phone: {
     type: String,
-    required: true,
   },
   email: {
     type: String,
-    required: true,
   },
   cart: {
     type: [mongoose.Schema.Types.ObjectId],
