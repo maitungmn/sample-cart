@@ -13,6 +13,7 @@ import corsConfig from './libs/cors';
 import { LoggerStream } from './libs/winston';
 
 import { indexRootRouter } from './routes';
+import { seedRouter } from './routes/seed';
 
 const hostname = process.env.APP_HOST;
 const port = process.env.APP_PORT;
@@ -28,6 +29,7 @@ app.use(helmet());
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use(indexRootRouter);
+app.use(seedRouter);
 
 app.all('*', async () => {
   throw new Error('API not available!');

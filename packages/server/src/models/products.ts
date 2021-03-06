@@ -2,21 +2,20 @@ import mongoose from 'mongoose';
 import { updateIfCurrentPlugin } from 'mongoose-update-if-current';
 import { BaseCollections } from './base-collections';
 
-interface ProductsAttrs {
+export interface ProductsAttrs {
+  id?: mongoose.Types.ObjectId;
   name: string;
   imageUrl: string;
   price: number;
-  categoryID: mongoose.Types.ObjectId;
 }
 
 export interface ProductsDoc extends mongoose.Document {
   name: string;
   imageUrl: string;
   price: number;
-  categoryID: mongoose.Types.ObjectId;
 }
 
-interface ProductsModel extends mongoose.Model<ProductsDoc> {
+export interface ProductsModel extends mongoose.Model<ProductsDoc> {
   build(attrs: ProductsAttrs): ProductsDoc
 }
 
@@ -31,11 +30,6 @@ const productsSchema = new mongoose.Schema({
   },
   price: {
     type: Number,
-    required: true,
-  },
-  categoryID: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: BaseCollections.CATEGORIES,
     required: true,
   },
 }, {

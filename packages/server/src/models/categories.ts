@@ -2,15 +2,15 @@ import mongoose from 'mongoose';
 import { updateIfCurrentPlugin } from 'mongoose-update-if-current';
 import { BaseCollections } from './base-collections';
 
-interface CategoriesAttrs {
+export interface CategoriesAttrs {
   title: string
-  productIDs: mongoose.Types.ObjectId[]
+  productIDs?: mongoose.Types.ObjectId[]
 }
 
 interface CategoriesDoc extends mongoose.Document {
   title: string
-  productIDs: mongoose.Types.ObjectId[]
-  version: number
+  productIDs?: mongoose.Types.ObjectId[]
+  version?: number
 }
 
 interface CategoriesModel extends mongoose.Model<CategoriesDoc> {

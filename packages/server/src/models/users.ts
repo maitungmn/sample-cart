@@ -3,6 +3,7 @@ import { updateIfCurrentPlugin } from 'mongoose-update-if-current';
 import { BaseCollections } from './base-collections';
 
 interface UsersAttrs {
+  userID: string;
   name: string;
   address: string;
   phone: string;
@@ -11,6 +12,7 @@ interface UsersAttrs {
 }
 
 export interface UsersDoc extends mongoose.Document {
+  userID: string;
   name: string;
   address: string;
   phone: string;
@@ -24,6 +26,11 @@ interface UsersModel extends mongoose.Model<UsersDoc> {
 }
 
 const usersSchema = new mongoose.Schema({
+  userID: {
+    type: String,
+    required: true,
+    unique: true,
+  },
   name: {
     type: String,
     required: true,
