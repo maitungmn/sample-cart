@@ -7,7 +7,6 @@ interface ProductsAttrs {
   imageUrl: string;
   price: number;
   categoryID: mongoose.Types.ObjectId;
-  userID?: mongoose.Types.ObjectId[];
 }
 
 export interface ProductsDoc extends mongoose.Document {
@@ -15,8 +14,6 @@ export interface ProductsDoc extends mongoose.Document {
   imageUrl: string;
   price: number;
   categoryID: mongoose.Types.ObjectId;
-  userID?: mongoose.Types.ObjectId[];
-  version: number;
 }
 
 interface ProductsModel extends mongoose.Model<ProductsDoc> {
@@ -41,10 +38,6 @@ const productsSchema = new mongoose.Schema({
     ref: BaseCollections.CATEGORIES,
     required: true,
   },
-  userID: {
-    type: [mongoose.Schema.Types.ObjectId],
-    ref: BaseCollections.USERS,
-  },
 }, {
   toJSON: {
     transform(doc, ret) {
@@ -64,4 +57,4 @@ const Products = mongoose.model<ProductsDoc, ProductsModel>(
   productsSchema,
 );
 
-export { Products };
+export { Products, productsSchema };
