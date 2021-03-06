@@ -1,6 +1,8 @@
 export const baseAPI = '/api/v1';
 
 export enum BaseRoute {
+  Docs = '/api-docs',
   Seed = '/seed',
-  dashboard = '/dashboard',
+  Dashboard = '/dashboard',
+  Products = '/products',
 }

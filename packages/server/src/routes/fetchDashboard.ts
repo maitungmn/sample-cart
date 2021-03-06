@@ -11,7 +11,7 @@ import {
 
 const router = express.Router();
 
-export const baseFetchDashBoardRoute = baseAPI + BaseRoute.dashboard;
+export const baseFetchDashBoardRoute = baseAPI + BaseRoute.Dashboard;
 
 export const fetchCate = () => Categories.find({});
 

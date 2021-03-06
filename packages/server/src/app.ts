@@ -12,10 +12,11 @@ import swaggerDocument from './docs/swagger.json';
 import corsConfig from './libs/cors';
 import { LoggerStream } from './libs/winston';
 import {
-  fetchDashboardRouter,
+  fetchDashboardRouter, fetchProductsByCateIDRouter,
   indexRootRouter,
   seedRouter,
 } from './routes';
+import { BaseRoute } from './routes/base-route';
 import { ECommons } from './commons';
 
 const hostname = process.env.APP_HOST;
@@ -32,10 +33,16 @@ app.use(cors(corsConfig({ hostname, port })));
 isDev !== ECommons.Dev && app.use(morgan('combined', { stream: new LoggerStream() }));
 app.use(helmet());
 
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+// Routes
+// Routes: API Doc
+app.use(BaseRoute.Docs, swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+// Routes: Root
 app.use(indexRootRouter);
+// Routes: Seed
 app.use(seedRouter);
+// Routes: Main
 app.use(fetchDashboardRouter);
+app.use(fetchProductsByCateIDRouter);
 
 app.all('*', async () => {
   throw new Error('API not available!');

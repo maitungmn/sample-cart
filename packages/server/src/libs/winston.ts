@@ -31,6 +31,6 @@ const logger = winston.createLogger({
 export class LoggerStream {
   // eslint-disable-next-line class-methods-use-this
   write(message: string) {
-    logger.info(message.replace('"', ' ').substring(0, message.lastIndexOf('\n')));
+    logger.info(message.replace(/"/g, "'").substring(0, message.lastIndexOf('\n')));
   }
 }
