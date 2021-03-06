@@ -5,4 +5,5 @@ export enum BaseRoute {
   Seed = '/seed',
   Dashboard = '/dashboard',
   Products = '/products',
+  Payment = '/pay',
 }

@@ -4,6 +4,7 @@ export enum ECommons {
   MissingUserID = 'UserID was missing!',
   MissingProductID = 'ProductID was missing!',
   NotFoundUser = 'User not found!',
+  InvalidBody = 'Invalid body!',
   // env
   Dev = 'dev',
   // Others

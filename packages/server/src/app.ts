@@ -16,7 +16,7 @@ import {
   fetchDashboardRouter,
   fetchProductsByCateIDRouter,
   fetchProductsByUserIDRouter,
-  indexRootRouter,
+  indexRootRouter, paymentRouter,
   seedRouter,
 } from './routes';
 import { BaseRoute } from './routes/base-route';
@@ -43,12 +43,14 @@ app.use(BaseRoute.Docs, swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use(indexRootRouter);
 // Routes: Seed
 app.use(seedRouter);
-// Routes: Main
+// Routes: Products
 app.use(fetchDashboardRouter);
 app.use(fetchProductsByCateIDRouter);
 app.use(fetchProductsByUserIDRouter);
 app.use(addProductsToCartRouter);
 app.use(deleteProductInCartRouter);
+// Routes: Pay
+app.use(paymentRouter);
 
 app.all('*', async () => {
   throw new Error('API not available!');
