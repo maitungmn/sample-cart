@@ -1,9 +1,9 @@
 import request from 'supertest';
-import { app } from '../../app';
-import { baseFetchProductsByCateIDRoute } from '../fetchProductByCateId';
-import { Categories } from '../../models';
-import { ECommons } from '../../commons';
-import { baseAPI, BaseRoute } from '../base-route';
+import { app } from '../../../app';
+import { baseFetchProductsByCateIDRoute } from '../../products/fetchProductByCateId';
+import { Categories } from '../../../models';
+import { ECommons } from '../../../commons';
+import { baseAPI, BaseRoute } from '../../base-route';
 
 describe('Test packages/server/src/routes/fetchProductByCateId.ts', () => {
   const route = baseAPI + BaseRoute.Products;

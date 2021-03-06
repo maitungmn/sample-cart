@@ -1,9 +1,9 @@
 import express, { Request, Response } from 'express';
-import { baseAPI, BaseRoute } from './base-route';
+import { baseAPI, BaseRoute } from '../base-route';
 import {
   Products, Users,
-} from '../models';
-import { ECommons } from '../commons';
+} from '../../models';
+import { ECommons } from '../../commons';
 
 const router = express.Router();
 

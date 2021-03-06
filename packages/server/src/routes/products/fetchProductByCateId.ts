@@ -1,9 +1,9 @@
 import express, { Request, Response } from 'express';
-import { baseAPI, BaseRoute } from './base-route';
+import { baseAPI, BaseRoute } from '../base-route';
 import {
   Categories,
   Products,
-} from '../models';
+} from '../../models';
 
 const router = express.Router();
 

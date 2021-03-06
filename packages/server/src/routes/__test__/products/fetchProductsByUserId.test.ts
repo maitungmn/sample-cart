@@ -1,9 +1,9 @@
 import request from 'supertest';
 import { Types } from 'mongoose';
-import { app } from '../../app';
-import { baseFetchProductsByUserIDRoute } from '../fetchProductsByUserId';
-import { ECommons } from '../../commons';
-import { Categories, Products, Users } from '../../models';
+import { app } from '../../../app';
+import { baseFetchProductsByUserIDRoute } from '../../products/fetchProductsByUserId';
+import { ECommons } from '../../../commons';
+import { Categories, Products, Users } from '../../../models';
 
 describe('Test packages/server/src/routes/fetchProductsByUserId.ts', () => {
   const defaultUserID = '60431ccf2d1807f27e57e466';
