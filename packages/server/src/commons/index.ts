@@ -3,6 +3,7 @@ export enum ECommons {
   DefaultError = 'Something went wrong!',
   MissingUserID = 'UserID was missing!',
   MissingProductID = 'ProductID was missing!',
+  NotFoundUser = 'User not found!',
   // env
   Dev = 'dev',
   // Others
