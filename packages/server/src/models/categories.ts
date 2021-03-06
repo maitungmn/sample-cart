@@ -38,7 +38,6 @@ const categoriesSchema = new mongoose.Schema({
 // Update version field '__v'
 categoriesSchema.set('versionKey', 'version');
 categoriesSchema.plugin(updateIfCurrentPlugin);
-// eslint-disable-next-line no-use-before-define
 categoriesSchema.statics.build = (attrs: CategoriesAttrs) => new Categories(attrs);
 
 const Categories = mongoose.model<CategoriesDoc, CategoriesModel>(
