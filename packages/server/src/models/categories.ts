@@ -7,7 +7,7 @@ export interface CategoriesAttrs {
   productIDs?: mongoose.Types.ObjectId[]
 }
 
-interface CategoriesDoc extends mongoose.Document {
+export interface CategoriesDoc extends mongoose.Document {
   title: string
   productIDs?: mongoose.Types.ObjectId[]
   version?: number
