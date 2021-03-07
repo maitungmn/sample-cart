@@ -15,7 +15,6 @@
     "axios": "^0.21.1",
     "customize-cra": "^1.0.0",
     "eslint": "^7.21.0",
-    "history": "^5.0.0",
     "nookies": "^2.5.2",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
@@ -93,6 +92,8 @@
         }
       ],
       "no-use-before-define": "off",
+      "no-alert": "off",
+      "jsx-a11y/anchor-is-valid": "off",
       "@typescript-eslint/no-use-before-define": [
         "error"
       ],
@@ -147,14 +148,6 @@
       "text-summary",
       "clover"
     ],
-    "coverageThreshold": {
-      "global": {
-        "statements": 80,
-        "branches": 80,
-        "lines": 80,
-        "functions": 80
-      }
-    },
     "snapshotSerializers": [
       "enzyme-to-json/serializer"
     ],

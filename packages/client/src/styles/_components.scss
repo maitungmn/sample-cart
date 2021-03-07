@@ -74,7 +74,7 @@
 // USER NAVIGATION
 .user-nav {
     align-self: stretch;
-    
+
     display: flex;
     align-items: center;
 
@@ -418,7 +418,7 @@
         //     mask-size: cover;
         //     background-image: none;
         // }
-        
+
     }
 }
 
@@ -591,4 +591,8 @@
         outline: none;
         animation: pulsate 1s infinite;
     }
+}
+
+.button-add-to-cart {
+    justify-content: flex-end;
 }
