@@ -4,6 +4,7 @@ import {
   Users,
 } from '../../models';
 import { ECommons } from '../../commons';
+import { requiredAuth, validateRequest } from '../../middlewares';
 
 const router = express.Router();
 
@@ -11,6 +12,8 @@ export const baseUserPayRoute = `${baseAPI + BaseRoute.Payment}`;
 
 router.post(
   baseUserPayRoute,
+  requiredAuth,
+  validateRequest,
   async (req: Request, res: Response) => {
     const {
       name,
@@ -20,10 +23,6 @@ router.post(
     } = req.body;
 
     const userID = req.headers.authorization;
-    if (!userID) {
-      res.status(400).send({ error: ECommons.MissingUserID });
-      return;
-    }
 
     if (!name || !address || !phone || !email) {
       res.status(400).send({ error: ECommons.InvalidBody });
@@ -39,7 +38,7 @@ router.post(
           email,
           cart: [],
         },
-      });
+      }, { useFindAndModify: false });
 
       if (!user) {
         res.status(400).send({ error: ECommons.NotFoundUser });
