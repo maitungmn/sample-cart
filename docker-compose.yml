@@ -1,0 +1,41 @@
+version: "3.9"
+services:
+  mongo:
+    image: mongo:latest
+    ports:
+      - 27017:27017
+    volumes:
+      - mongodb_data_container:/data/db
+  nginx:
+    depends_on:
+      - api
+      - client
+    restart: always
+    build:
+      dockerfile: packages/nginx/Dockerfile.dev
+      context: packages/nginx
+    ports:
+      - "3050:80"
+  api:
+    depends_on:
+      - mongo
+    build:
+      dockerfile: packages/server/Dockerfile.dev
+      context: packages/server
+    volumes:
+      - /app/node_modules
+      - ./server:/app
+    environment:
+      - HOST_MONGO=mongodb://mongo:27017/form
+  client:
+    stdin_open: true
+    build:
+      dockerfile: packages/client/Dockerfile.dev
+      context: packages/client
+    volumes:
+      - /app/node_modules
+      - ./client:/app
+    environment:
+      - REACT_APP_QUERY_API=/api/api/form
+volumes:
+  mongodb_data_container:
