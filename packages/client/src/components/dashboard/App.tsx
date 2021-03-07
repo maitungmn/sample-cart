@@ -31,7 +31,9 @@ const useStyles = makeStyles({
 
 function App() {
   const classes = useStyles();
-  const { categories, products, setProducts } = useStoreContext();
+  const {
+    categories, products, setProducts, productsInCart, setProductsInCart,
+  } = useStoreContext();
 
   const [cateSelected, setCateSelected] = React.useState<string>('');
 
@@ -43,7 +45,7 @@ function App() {
 
   return (
     <>
-      <Header />
+      <Header productsInCart={productsInCart as IProduct[]} />
 
       <div className="content">
         <nav className="sidebar">
@@ -60,6 +62,10 @@ function App() {
             <ProductList
               products={products as IProduct[]}
               classes={classes}
+              productsInCart={productsInCart as IProduct[]}
+              setProductsInCart={
+                setProductsInCart as React.Dispatch<React.SetStateAction<IProduct[]>>
+              }
             />
           </Box>
         </main>

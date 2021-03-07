@@ -1,7 +1,7 @@
 import request from 'supertest';
 import { Types } from 'mongoose';
 import { app } from '../../../app';
-import { baseFetchProductsByUserIDRoute } from '../../products/fetchProductsByUserId';
+import { baseFetchProductsByUserIDRoute } from '../../products';
 import { ECommons } from '../../../commons';
 import { Categories, Products, Users } from '../../../models';
 
@@ -30,6 +30,13 @@ describe('Test packages/server/src/routes/fetchProductsByUserId.ts', () => {
 
   const mockDefaultProduct = {
     id: mockProductObjectId,
+    name: 'Product 1',
+    imageUrl: 'https://source.unsplash.com/random/300x300',
+    price: 28,
+  };
+
+  const mockDefaultRawProduct = {
+    _id: mockProductObjectId,
     name: 'Product 1',
     imageUrl: 'https://source.unsplash.com/random/300x300',
     price: 28,
@@ -105,6 +112,29 @@ describe('Test packages/server/src/routes/fetchProductsByUserId.ts', () => {
 
     expect(res.status).toEqual(200);
     expect(res.body.data).toEqual([]);
+  });
+
+  it('products empty', async () => {
+    Users.findOne = jest.fn().mockResolvedValue(mockDefaultUser);
+    Products.find = jest.fn().mockResolvedValue([]);
+
+    const res = await request(app)
+      .get(baseFetchProductsByUserIDRoute)
+      .set('Authorization', defaultUserID);
+
+    expect(res.status).toEqual(200);
+    expect(res.body.data).toEqual([]);
+  });
+
+  it('products found', async () => {
+    Users.findOne = jest.fn().mockResolvedValue(mockDefaultUser);
+    Products.find = jest.fn().mockResolvedValue([mockDefaultRawProduct]);
+
+    const res = await request(app)
+      .get(baseFetchProductsByUserIDRoute)
+      .set('Authorization', defaultUserID);
+
+    expect(res.status).toEqual(200);
   });
 
   it('expect get error default', async () => {

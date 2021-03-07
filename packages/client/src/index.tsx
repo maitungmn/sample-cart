@@ -12,20 +12,20 @@ import { StoreProvider } from './contexts/store';
 
 ReactDOM.render(
   <React.StrictMode>
-    <StoreProvider>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <div className="container">
-          <Suspense fallback={<div>Loading...</div>}>
-            <Router>
-              <Switch>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <div className="container">
+        <Suspense fallback={<div>Loading...</div>}>
+          <Router>
+            <Switch>
+              <StoreProvider>
                 <Route exact path="/" component={App} />
-              </Switch>
-            </Router>
-          </Suspense>
-        </div>
-      </ThemeProvider>
-    </StoreProvider>
+              </StoreProvider>
+            </Switch>
+          </Router>
+        </Suspense>
+      </div>
+    </ThemeProvider>
   </React.StrictMode>,
   document.getElementById('root'),
 );

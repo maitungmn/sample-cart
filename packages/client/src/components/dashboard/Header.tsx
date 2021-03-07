@@ -1,7 +1,12 @@
 import { Box } from '@material-ui/core';
 import React from 'react';
+import { IProduct } from '../../hooks/userFetchDashboard';
 
-const Header = () => (
+interface IProps {
+  productsInCart: IProduct[];
+}
+
+const Header = ({ productsInCart }: IProps) => (
   <div className="header">
     <Box
       display="flex"
@@ -16,7 +21,7 @@ const Header = () => (
         <svg className="user-nav__icon">
           <use xlinkHref="img/shopping-cart.svg#Capa_1" />
         </svg>
-        <span className="user-nav__notification">7</span>
+        <span className="user-nav__notification">{productsInCart?.length || 0}</span>
       </div>
       <div className="user-nav__user">
         <img src="https://randomuser.me/api/portraits/women/90.jpg" alt="User" className="user-nav__user-photo" />
