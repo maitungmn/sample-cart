@@ -1,10 +1,10 @@
 import express, { Request, Response } from 'express';
-import { v4 as uuidv4 } from 'uuid';
 import { Types } from 'mongoose';
 import { baseAPI, BaseRoute } from '../base-route';
 import {
   Users,
 } from '../../models';
+import { requiredAuth } from '../../middlewares';
 
 const router = express.Router();
 
@@ -12,19 +12,18 @@ export const baseAddProductsToCartRoute = `${baseAPI + BaseRoute.Products}/:prod
 
 router.post(
   baseAddProductsToCartRoute,
+  requiredAuth,
   async (req: Request, res: Response) => {
     const { productID } = req.params;
 
     let user: any;
-    const userID = req.headers.authorization || '';
+    const userID = req.headers.authorization;
     try {
-      if (userID) {
-        user = await Users.findOne({ userID });
-      }
+      user = await Users.findOne({ userID });
 
-      if (!userID || !user) {
+      if (!user) {
         user = await Users.create({
-          userID: userID || uuidv4(),
+          userID,
         });
       }
 

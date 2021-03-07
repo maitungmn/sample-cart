@@ -5,6 +5,7 @@ import {
   Users,
 } from '../../models';
 import { ECommons } from '../../commons';
+import { requiredAuth } from '../../middlewares';
 
 const router = express.Router();
 
@@ -12,14 +13,11 @@ export const baseDeleteProductInCartRoute = `${baseAPI + BaseRoute.Products}/:pr
 
 router.delete(
   baseDeleteProductInCartRoute,
+  requiredAuth,
   async (req: Request, res: Response) => {
     const { productID } = req.params;
 
     const userID = req.headers.authorization;
-    if (!userID) {
-      res.status(400).send({ error: ECommons.MissingUserID });
-      return;
-    }
 
     try {
       const user = await Users.findOne({ userID });

@@ -21,13 +21,15 @@
       "!src/**/*.d.ts",
       "!src/index.ts",
       "!src/app.ts",
-      "!src/libs/*.ts"
+      "!src/libs/*.ts",
+      "!src/middlewares/*.ts"
     ],
     "coveragePathIgnorePatterns": [
       "./src/*/*.types.ts",
       "./src/index.ts",
       "./src/app.ts",
-      "./src/libs/*.ts"
+      "./src/libs/*.ts",
+      "./src/middlewares/*.ts"
     ],
     "coverageReporters": [
       "json",
@@ -55,7 +57,7 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-async-errors": "^3.1.1",
-    "express-validator": "^6.6.0",
+    "express-validator": "^6.10.0",
     "helmet": "^4.4.1",
     "mongoose": "^5.9.21",
     "mongoose-update-if-current": "^1.4.0",
@@ -64,7 +66,6 @@
     "swagger-ui-express": "^4.1.6",
     "ts-node-dev": "^1.0.0-pre.50",
     "typescript": "^3.9.6",
-    "uuid": "^8.3.2",
     "winston": "^3.3.3"
   },
   "devDependencies": {
@@ -78,7 +79,6 @@
     "@types/supertest": "^2.0.10",
     "@types/swagger-jsdoc": "^6.0.0",
     "@types/swagger-ui-express": "^4.1.2",
-    "@types/uuid": "^8.3.0",
     "@typescript-eslint/eslint-plugin": "^4.16.1",
     "@typescript-eslint/parser": "^4.16.1",
     "eslint": "^7.21.0",

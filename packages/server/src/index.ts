@@ -11,7 +11,8 @@ const port = process.env.APP_PORT || 5000;
   }
 
   try {
-    await mongoose.connect(process.env.HOST_MONGO, {
+    const hostMongo = process.env.HOST_MONGO;
+    await mongoose.connect(hostMongo, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
       useCreateIndex: true,

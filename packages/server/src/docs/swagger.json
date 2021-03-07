@@ -32,12 +32,23 @@
         "tags": [
           "Users"
         ],
-        "description": "Create new user in system",
+        "summary": "Process payment",
+        "description": "System will store user's name, phone, address, email in this api",
         "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "description": "an userID",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          },
           {
             "name": "user",
             "in": "body",
-            "description": "User that we want to create",
+            "description": "User's information need to store",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/User"
             }
@@ -48,86 +59,402 @@
         ],
         "responses": {
           "200": {
-            "description": "New user is created",
+            "description": "Payment information accepted",
             "schema": {
               "$ref": "#/definitions/User"
             }
-          }
-        }
-      },
-      "get": {
-        "tags": [
-          "Users"
-        ],
-        "summary": "Get all users in system",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/Users"
+          },
+          "400": {
+            "description": "Errors",
+            "examples": {
+              "application/json": {
+                "error": "Something went wrong! | UserID was missing! | Invalid body!"
+              }
             }
           }
         }
       }
     },
-    "/users/{userId}": {
-      "parameters": [
-        {
-          "name": "userId",
-          "in": "path",
-          "required": true,
-          "description": "ID of user that we want to find",
-          "type": "string"
-        }
-      ],
+    "/": {
       "get": {
         "tags": [
-          "Users"
+          "Root"
         ],
-        "summary": "Get user with given ID",
+        "summary": "Ping server",
         "responses": {
           "200": {
-            "description": "User is found",
+            "description": "Hello World!"
+          }
+        }
+      }
+    },
+    "/seed": {
+      "post": {
+        "tags": [
+          "Root"
+        ],
+        "summary": "Seed Categories and Products",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Hello World!",
+            "examples": {
+              "application/json": {
+                "message": "Done!"
+              }
+            }
+          },
+          "400": {
+            "description": "Something went wrong!",
+            "examples": {
+              "application/json": {
+                "error": "Something went wrong!"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/dashboard": {
+      "get": {
+        "tags": [
+          "Dashboard"
+        ],
+        "summary": "Get dashboard items",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "examples": {
+              "application/json": {
+                "data": {
+                  "categories": [
+                    {
+                      "title": "Category  1",
+                      "id": "60444b529fea9d3c76e17c13"
+                    },
+                    {
+                      "title": "Category  2",
+                      "id": "60444b529fea9d3c76e17c14"
+                    },
+                    {
+                      "title": "Category  3",
+                      "id": "60444b529fea9d3c76e17c15"
+                    }
+                  ],
+                  "productsFirstCate": [
+                    {
+                      "name": "Product 1",
+                      "imageUrl": "https://source.unsplash.com/random/300x300",
+                      "price": 24,
+                      "version": 0,
+                      "id": "60444b529fea9d3c76e17bf5"
+                    },
+                    {
+                      "name": "Product 2",
+                      "imageUrl": "https://source.unsplash.com/random/300x300",
+                      "price": 42,
+                      "version": 0,
+                      "id": "60444b529fea9d3c76e17bf6"
+                    },
+                    {
+                      "name": "Product 3",
+                      "imageUrl": "https://source.unsplash.com/random/300x300",
+                      "price": 122,
+                      "version": 0,
+                      "id": "60444b529fea9d3c76e17bf7"
+                    },
+                    {
+                      "name": "Product 4",
+                      "imageUrl": "https://source.unsplash.com/random/300x300",
+                      "price": 73,
+                      "version": 0,
+                      "id": "60444b529fea9d3c76e17bf8"
+                    }
+                  ]
+                }
+              }
+            },
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Products"
+                },
+                {
+                  "$ref": "#/definitions/Categories"
+                }
+              ]
+            }
+          },
+          "400": {
+            "description": "Something went wrong!",
+            "examples": {
+              "application/json": {
+                "error": "Something went wrong!"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/products/{productID}": {
+      "post": {
+        "tags": [
+          "Products"
+        ],
+        "summary": "Add Product to cart",
+        "description": "In case cant find user with userID, system will create new user with provided userID",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "description": "an userID",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/User"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "examples": {
+              "application/json": {
+                "data": {
+                  "cart": [
+                    "60444b529fea9d3c76e17bf8"
+                  ],
+                  "userID": "171df952-871b-4c81-9659-a40e91dae936",
+                  "version": 0,
+                  "id": "60445353d8a57b3d97b64636"
+                }
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Products"
+            }
+          },
+          "400": {
+            "description": "Something went wrong!",
+            "examples": {
+              "application/json": {
+                "error": "Something went wrong! | UserID was missing!"
+              }
             }
           }
         }
       },
       "delete": {
-        "summary": "Delete user with given ID",
         "tags": [
-          "Users"
+          "Products"
+        ],
+        "summary": "Remove a product in cart",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "description": "an userID",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
         ],
         "responses": {
           "200": {
-            "description": "User is deleted",
+            "description": "OK",
+            "examples": {
+              "application/json": {
+                "data": {
+                  "cart": [],
+                  "userID": "171df952-871b-4c81-9659-a40e91dae936",
+                  "version": 0,
+                  "id": "60445353d8a57b3d97b64636"
+                }
+              }
+            },
             "schema": {
-              "$ref": "#/definitions/User"
+              "$ref": "#/definitions/Products"
+            }
+          },
+          "400": {
+            "description": "Errors",
+            "examples": {
+              "application/json": {
+                "error": "Something went wrong! | UserID was missing!"
+              }
             }
           }
         }
-      },
-      "put": {
-        "summary": "Update user with give ID",
+      }
+    },
+    "/products": {
+      "get": {
         "tags": [
-          "Users"
+          "Products"
         ],
+        "summary": "Get Products by userID",
+        "description": "Products inside user cart",
         "parameters": [
           {
-            "name": "user",
-            "in": "body",
-            "description": "User with new values of properties",
+            "name": "authorization",
+            "in": "header",
+            "description": "an userID",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/User"
             }
           }
         ],
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
-            "description": "User is updated",
+            "description": "OK",
+            "examples": {
+              "application/json": {
+                "data": [
+                  {
+                    "name": "Product 1",
+                    "imageUrl": "https://source.unsplash.com/random/300x300",
+                    "price": 24,
+                    "version": 0,
+                    "id": "60444b529fea9d3c76e17bf5"
+                  },
+                  {
+                    "name": "Product 2",
+                    "imageUrl": "https://source.unsplash.com/random/300x300",
+                    "price": 42,
+                    "version": 0,
+                    "id": "60444b529fea9d3c76e17bf6"
+                  },
+                  {
+                    "name": "Product 3",
+                    "imageUrl": "https://source.unsplash.com/random/300x300",
+                    "price": 122,
+                    "version": 0,
+                    "id": "60444b529fea9d3c76e17bf7"
+                  },
+                  {
+                    "name": "Product 4",
+                    "imageUrl": "https://source.unsplash.com/random/300x300",
+                    "price": 73,
+                    "version": 0,
+                    "id": "60444b529fea9d3c76e17bf8"
+                  },
+                  {
+                    "name": "Product 5",
+                    "imageUrl": "https://source.unsplash.com/random/300x300",
+                    "price": 2,
+                    "version": 0,
+                    "id": "60444b529fea9d3c76e17bf9"
+                  },
+                  {
+                    "name": "Product 6",
+                    "imageUrl": "https://source.unsplash.com/random/300x300",
+                    "price": 112,
+                    "version": 0,
+                    "id": "60444b529fea9d3c76e17bfa"
+                  }
+                ]
+              }
+            },
             "schema": {
-              "$ref": "#/definitions/User"
+              "$ref": "#/definitions/Products"
+            }
+          },
+          "400": {
+            "description": "Errors",
+            "examples": {
+              "application/json": {
+                "error": "Something went wrong! | UserID was missing! | Mongo internal errors"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/products/{cateID}": {
+      "get": {
+        "tags": [
+          "Products"
+        ],
+        "summary": "Get Products by cateID",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "examples": {
+              "application/json": {
+                "data": [
+                  {
+                    "name": "Product 1",
+                    "imageUrl": "https://source.unsplash.com/random/300x300",
+                    "price": 24,
+                    "version": 0,
+                    "id": "60444b529fea9d3c76e17bf5"
+                  },
+                  {
+                    "name": "Product 2",
+                    "imageUrl": "https://source.unsplash.com/random/300x300",
+                    "price": 42,
+                    "version": 0,
+                    "id": "60444b529fea9d3c76e17bf6"
+                  },
+                  {
+                    "name": "Product 3",
+                    "imageUrl": "https://source.unsplash.com/random/300x300",
+                    "price": 122,
+                    "version": 0,
+                    "id": "60444b529fea9d3c76e17bf7"
+                  },
+                  {
+                    "name": "Product 4",
+                    "imageUrl": "https://source.unsplash.com/random/300x300",
+                    "price": 73,
+                    "version": 0,
+                    "id": "60444b529fea9d3c76e17bf8"
+                  },
+                  {
+                    "name": "Product 5",
+                    "imageUrl": "https://source.unsplash.com/random/300x300",
+                    "price": 2,
+                    "version": 0,
+                    "id": "60444b529fea9d3c76e17bf9"
+                  },
+                  {
+                    "name": "Product 6",
+                    "imageUrl": "https://source.unsplash.com/random/300x300",
+                    "price": 112,
+                    "version": 0,
+                    "id": "60444b529fea9d3c76e17bfa"
+                  }
+                ]
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Products"
+            }
+          },
+          "400": {
+            "description": "Errors",
+            "examples": {
+              "application/json": {
+                "error": "Something went wrong! | Mongo internal errors"
+              }
             }
           }
         }
@@ -137,29 +464,101 @@
   "definitions": {
     "User": {
       "required": [
-        "email",
-        "_id"
+        "userID"
       ],
       "properties": {
-        "_id": {
+        "id": {
           "type": "string",
           "uniqueItems": true
+        },
+        "userID": {
+          "type": "string",
+          "uniqueItems": true
+        },
+        "name": {
+          "type": "string"
         },
         "email": {
-          "type": "string",
-          "uniqueItems": true
-        },
-        "lastName": {
           "type": "string"
         },
-        "firstName": {
+        "address": {
           "type": "string"
+        },
+        "phone": {
+          "type": "string"
+        },
+        "cart": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
-    "Users": {
+    "Product": {
+      "required": [
+        "name",
+        "imageUrl",
+        "price"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "uniqueItems": true
+        },
+        "name": {
+          "type": "string"
+        },
+        "imageUrl": {
+          "type": "string"
+        },
+        "price": {
+          "type": "number"
+        }
+      }
+    },
+    "Products": {
       "type": "array",
-      "$ref": "#/definitions/User"
+      "items": {
+        "$ref": "#/definitions/Product"
+      }
+    },
+    "Category": {
+      "required": [
+        "title"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "uniqueItems": true
+        },
+        "title": {
+          "type": "string"
+        },
+        "productIDs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Categories": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Category"
+      }
+    },
+    "DefaultErrors": {
+      "required": [
+        "error"
+      ],
+      "properties": {
+        "error": {
+          "type": "string",
+          "description": "Something went wrong!"
+        }
+      }
     }
   }
 }

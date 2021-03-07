@@ -46,11 +46,11 @@ describe('Test packages/server/src/routes/addProductToCart.ts', () => {
       .expect(200);
   });
 
-  it('success without userID', async () => {
+  it('error without userID', async () => {
     Users.updateOne = jest.fn().mockResolvedValue({});
     await request(app)
       .post(`${baseRoute}/${defaultProductID}`)
-      .expect(200);
+      .expect(400);
   });
 
   it('success without user cart', async () => {
