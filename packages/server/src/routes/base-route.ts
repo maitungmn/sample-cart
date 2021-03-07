@@ -1,4 +1,4 @@
-export const baseAPI = '/api/v1';
+export const baseAPI = process.env.APP_BASE_ROUTE || '/api/v1';
 
 export enum BaseRoute {
   Docs = '/api-docs',

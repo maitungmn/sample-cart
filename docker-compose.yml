@@ -3,7 +3,7 @@ services:
   mongo:
     image: mongo:latest
     ports:
-      - 27017:27017
+      - 27027:27017
     volumes:
       - mongodb_data_container:/data/db
   nginx:
@@ -12,30 +12,34 @@ services:
       - client
     restart: always
     build:
-      dockerfile: packages/nginx/Dockerfile.dev
-      context: packages/nginx
+      dockerfile: Dockerfile.dev
+      context: ./packages/nginx
     ports:
       - "3050:80"
   api:
     depends_on:
       - mongo
     build:
-      dockerfile: packages/server/Dockerfile.dev
-      context: packages/server
+      dockerfile: Dockerfile.dev
+      context: ./packages/server
     volumes:
       - /app/node_modules
-      - ./server:/app
+      - ./packages/server:/app
     environment:
-      - HOST_MONGO=mongodb://mongo:27017/form
+      - HOST_MONGO=${HOST_MONGO}
+      - APP_HOST=${APP_HOST}
+      - APP_PORT=${APP_PORT}
+      - APP_ENV=${APP_ENV}
+      - APP_BASE_ROUTE=${APP_BASE_ROUTE}
   client:
     stdin_open: true
     build:
-      dockerfile: packages/client/Dockerfile.dev
-      context: packages/client
+      dockerfile: Dockerfile.dev
+      context: ./packages/client
     volumes:
       - /app/node_modules
-      - ./client:/app
+      - ./packages/client:/app
     environment:
-      - REACT_APP_QUERY_API=/api/api/form
+      - REACT_APP_QUERY_API=${APP_BASE_ROUTE}
 volumes:
   mongodb_data_container:
