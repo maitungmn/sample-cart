@@ -30,7 +30,7 @@ const app = express();
 app.set('trust proxy', true);
 app.use(json());
 // @ts-ignore
-app.use(cors(corsConfig({ hostname, port })));
+app.use(cors(corsConfig()));
 
 // eslint-disable-next-line no-unused-expressions
 isDev !== ECommons.Dev && app.use(morgan('combined', { stream: new LoggerStream() }));

@@ -1,5 +1,5 @@
-export default ({ hostname, port }: { hostname: string, port: number }) => {
-  const allowedOrigins = [`http://${hostname}:${port}`, 'http://localhost:5000'];
+export default () => {
+  const allowedOrigins = ['http://localhost:3000'];
   return {
     origin(origin: string, callback: (arg0: Error | null, arg1: boolean) => any) {
       // allow requests with no origin

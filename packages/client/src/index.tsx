@@ -2,25 +2,33 @@ import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { ThemeProvider } from '@material-ui/core/styles';
-import { Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import theme from './theme';
 
-import App from './components/App';
-import history from './history';
+import './index.scss';
+
+import App from './components/dashboard/App';
+import PaymentApp from './components/payment/App';
+
+import { StoreProvider } from './contexts/store';
 
 ReactDOM.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Suspense fallback={<div>Loading...</div>}>
-        <Router history={history}>
-          <Switch>
-            <Route exact path="/" component={App} />
-          </Switch>
-        </Router>
-      </Suspense>
+      <div className="container">
+        <Suspense fallback={<div>Loading...</div>}>
+          <Router>
+            <Switch>
+              <StoreProvider>
+                <Route exact path="/" component={App} />
+              </StoreProvider>
+              <Route exact path="/payment" component={PaymentApp} />
+            </Switch>
+          </Router>
+        </Suspense>
+      </div>
     </ThemeProvider>
-    ,
   </React.StrictMode>,
   document.getElementById('root'),
 );

@@ -10,7 +10,7 @@
     "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-    "strict": true,
+    "strict": false,
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
     "module": "esnext",
@@ -22,14 +22,18 @@
     "noImplicitAny": true,
     "noImplicitThis": true,
     "strictNullChecks": true,
-    "typeRoots": ["node_modules/@types"],
+    "typeRoots": [
+      "node_modules/@types"
+    ],
     "plugins": [
       {
         "name": "typescript-plugin-css-modules"
       }
-    ]
+    ],
+    "baseUrl": "./src"
   },
   "include": [
-    "src"
+    "src",
+    "src/externals.d.ts"
   ]
 }

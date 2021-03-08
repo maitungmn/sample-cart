@@ -15,15 +15,13 @@
     "axios": "^0.21.1",
     "customize-cra": "^1.0.0",
     "eslint": "^7.21.0",
-    "history": "^5.0.0",
-    "less": "^4.1.1",
-    "less-loader": "^8.0.0",
+    "nookies": "^2.5.2",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
     "typescript": "^4.2.3",
-    "uniqid": "^5.3.0",
+    "uuid": "^8.3.2",
     "web-vitals": "^1.0.1"
   },
   "devDependencies": {
@@ -31,7 +29,7 @@
     "@types/enzyme-adapter-react-16": "^1.0.6",
     "@types/react-router-dom": "^5.1.7",
     "@types/sinon": "^9.0.10",
-    "@types/uniqid": "^5.3.0",
+    "@types/uuid": "^8.3.0",
     "@typescript-eslint/eslint-plugin": "^4.16.1",
     "@typescript-eslint/parser": "^4.16.1",
     "babel-plugin-import": "^1.13.3",
@@ -94,6 +92,8 @@
         }
       ],
       "no-use-before-define": "off",
+      "no-alert": "off",
+      "jsx-a11y/anchor-is-valid": "off",
       "@typescript-eslint/no-use-before-define": [
         "error"
       ],
@@ -148,14 +148,6 @@
       "text-summary",
       "clover"
     ],
-    "coverageThreshold": {
-      "global": {
-        "statements": 80,
-        "branches": 80,
-        "lines": 80,
-        "functions": 80
-      }
-    },
     "snapshotSerializers": [
       "enzyme-to-json/serializer"
     ],
