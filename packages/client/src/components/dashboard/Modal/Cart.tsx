@@ -111,6 +111,7 @@ const Cart = ({ setIsOpenUserInfo }: IProps) => {
         <Button
           variant="contained"
           color="primary"
+          disabled={!total}
           onClick={() => setIsOpenUserInfo(true)}
         >
           Next step
