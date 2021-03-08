@@ -1,5 +1,5 @@
 export default () => {
-  const allowedOrigins = ['http://localhost:3000'];
+  const allowedOrigins = ['http://206.189.40.114:3050/', 'http://localhost:3000'];
   return {
     origin(origin: string, callback: (arg0: Error | null, arg1: boolean) => any) {
       // allow requests with no origin
