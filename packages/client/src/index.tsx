@@ -8,6 +8,8 @@ import theme from './theme';
 import './index.scss';
 
 import App from './components/dashboard/App';
+import PaymentApp from './components/payment/App';
+
 import { StoreProvider } from './contexts/store';
 
 ReactDOM.render(
@@ -21,6 +23,7 @@ ReactDOM.render(
               <StoreProvider>
                 <Route exact path="/" component={App} />
               </StoreProvider>
+              <Route exact path="/payment" component={PaymentApp} />
             </Switch>
           </Router>
         </Suspense>

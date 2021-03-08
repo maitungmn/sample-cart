@@ -12,8 +12,6 @@ const useFetchUserCart = (setProductsInCart: React.Dispatch<React.SetStateAction
       try {
         const axiosInstance = buildClient({ Authorization: userID });
         const res = await axiosInstance.get('/products');
-        // eslint-disable-next-line no-console
-        console.log('res', res.data.data);
         setProductsInCart(res.data.data || []);
       } catch (e) {
         alert(e);

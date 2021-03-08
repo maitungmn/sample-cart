@@ -596,3 +596,16 @@
 .button-add-to-cart {
     justify-content: flex-end;
 }
+
+.cart-action {
+    display: flex;
+    justify-content: space-between;
+    font-size: 2rem;
+    margin-top: 1rem;
+}
+
+.MuiListItemText-root {
+    span {
+        font-size: 1.5rem !important;
+    }
+}
