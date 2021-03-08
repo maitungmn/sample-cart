@@ -40,6 +40,6 @@ services:
       - /app/node_modules
       - ./packages/client:/app
     environment:
-      - REACT_APP_QUERY_API=${APP_BASE_ROUTE}
+      - REACT_APP_QUERY_API=${REACT_APP_QUERY_API}
 volumes:
   mongodb_data_container:
