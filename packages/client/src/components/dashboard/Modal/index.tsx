@@ -5,6 +5,7 @@ import {
   Modal, Backdrop,
 } from '@material-ui/core';
 import Cart from './Cart';
+import UserInfo from './UserInfo';
 
 export interface IRefObject {
   handleOpen: () => void
@@ -29,6 +30,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 }));
 
 const TransitionsModal = React.forwardRef((props, ref) => {
+  const defaultTimeout = 500;
   React.useImperativeHandle<unknown, IRefObject>(ref,
     () => ({
       // eslint-disable-next-line @typescript-eslint/no-use-before-define
@@ -36,6 +38,16 @@ const TransitionsModal = React.forwardRef((props, ref) => {
     }));
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
+
+  const [isOpenUserInfo, setIsOpenUserInfo] = React.useState<boolean>(false);
+
+  React.useEffect(() => {
+    if (!open) {
+      setTimeout(() => {
+        setIsOpenUserInfo(false);
+      }, defaultTimeout);
+    }
+  }, [open]);
 
   const handleOpen = () => {
     setOpen(true);
@@ -54,13 +66,13 @@ const TransitionsModal = React.forwardRef((props, ref) => {
       closeAfterTransition
       BackdropComponent={Backdrop}
       BackdropProps={{
-        timeout: 500,
+        timeout: defaultTimeout,
       }}
       onClose={handleClose}
     >
       <Fade in={open}>
         <div className={classes.paper}>
-          <Cart />
+          {isOpenUserInfo ? <UserInfo /> : <Cart setIsOpenUserInfo={setIsOpenUserInfo} />}
         </div>
       </Fade>
     </Modal>

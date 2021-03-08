@@ -14,13 +14,17 @@ interface IQty {
   [key: string]: number;
 }
 
+interface IProps {
+  setIsOpenUserInfo: React.Dispatch<React.SetStateAction<boolean>>
+}
+
 const useStyles = makeStyles((theme: Theme) => createStyles({
   title: {
     margin: theme.spacing(2, 0, 2),
   },
 }));
 
-const Cart = () => {
+const Cart = ({ setIsOpenUserInfo }: IProps) => {
   const classes = useStyles();
 
   const {
@@ -107,6 +111,7 @@ const Cart = () => {
         <Button
           variant="contained"
           color="primary"
+          onClick={() => setIsOpenUserInfo(true)}
         >
           Next step
         </Button>

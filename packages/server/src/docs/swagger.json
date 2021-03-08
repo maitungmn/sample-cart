@@ -27,7 +27,7 @@
     "application/json"
   ],
   "paths": {
-    "/users": {
+    "/pay": {
       "post": {
         "tags": [
           "Users"
@@ -50,7 +50,7 @@
             "description": "User's information need to store",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/User"
+              "$ref": "#/definitions/UserInfo"
             }
           }
         ],
@@ -462,6 +462,28 @@
     }
   },
   "definitions": {
+    "UserInfo": {
+      "required": [
+        "name",
+        "email",
+        "address",
+        "phone"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "address": {
+          "type": "string"
+        },
+        "phone": {
+          "type": "string"
+        }
+      }
+    },
     "User": {
       "required": [
         "userID"
