@@ -7,6 +7,8 @@ import {
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import useStoreContext from '../../../hooks/useStoreContext';
 import { IProduct } from '../../../hooks/userFetchDashboard';
+import buildClient from '../../../api';
+import UserIDCookie from '../../../utils/userID';
 
 interface IQty {
   [key: string]: number;
@@ -23,7 +25,7 @@ const Cart = () => {
 
   const {
     productsInCart,
-    // setProductsInCart,
+    setProductsInCart,
   } = useStoreContext();
 
   const [total, setTotal] = React.useState<number>(0);
@@ -57,6 +59,23 @@ const Cart = () => {
     setTotal(totalPrice);
   }, [productsInCart]);
 
+  const onRemoveProd = async (id: string) => {
+    try {
+      const userID = UserIDCookie.get();
+      const axiosInstance = buildClient({ Authorization: userID });
+      await axiosInstance.delete(`products/${id}`);
+      const cloneProductInCart = [...(productsInCart || [])];
+      const indexOfId = cloneProductInCart?.findIndex((i) => i.id === id);
+      if (indexOfId >= 0) {
+        cloneProductInCart.splice(indexOfId, 1);
+        // eslint-disable-next-line no-unused-expressions
+        setProductsInCart && setProductsInCart([...cloneProductInCart]);
+      }
+    } catch (e) {
+      alert(e);
+    }
+  };
+
   return (
     <div>
       <Grid item>
@@ -70,7 +89,13 @@ const Cart = () => {
                 primary={`${qty?.[i.id] || 0} x ${i.name || ''}`}
               />
               <ListItemSecondaryAction>
-                <Button variant="outlined" size="small">Remove</Button>
+                <Button
+                  variant="outlined"
+                  size="small"
+                  onClick={() => onRemoveProd(i.id)}
+                >
+                  {qty?.[i.id] > 1 ? 'Reduce' : 'Remove'}
+                </Button>
               </ListItemSecondaryAction>
             </ListItem>
           ))}
