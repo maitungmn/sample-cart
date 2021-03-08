@@ -591,7 +591,12 @@
 }
 
 .button-add-to-cart {
-  justify-content: flex-end;
+  justify-content: space-between;
+
+  p {
+    font-size: 1.3rem;
+    color: var(--color-primary);
+  }
 }
 
 .cart-action {

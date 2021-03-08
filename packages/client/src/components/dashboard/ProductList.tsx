@@ -56,6 +56,9 @@ const ProductList = ({
               </Typography>
             </CardContent>
             <CardActions className="button-add-to-cart">
+              <Typography color="textSecondary" gutterBottom>
+                {`$${i.price}`}
+              </Typography>
               <Button
                 size="small"
                 disabled={productSelected === i.id}
