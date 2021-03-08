@@ -72,7 +72,7 @@ This sample can easily deploy through 'docker-compose.yml'
 
 ## Contributing
 
-[CONTRIBUTING](https://github.com/maitungmn/sample-cart/graphs/contributors).
+[CONTRIBUTOR](https://github.com/maitungmn/sample-cart/graphs/contributors).
 
 ## Versioning
 
